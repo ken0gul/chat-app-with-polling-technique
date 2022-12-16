@@ -1,5 +1,7 @@
 package com.coderscampus.assignment14.web;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +22,11 @@ public class WelcomeController {
 	@PostMapping("/welcome")
 	@ResponseBody
 	public User postUsername(@RequestBody User userFromJs) {
+		UUID id = userFromJs.getId();
 		System.out.println(userFromJs);
 		User user = new User();
 		user.setUsername(userFromJs.getUsername());
-		user.setId(userFromJs.getId());
+		user.setId(id);
 		return user;
 	}
 }
