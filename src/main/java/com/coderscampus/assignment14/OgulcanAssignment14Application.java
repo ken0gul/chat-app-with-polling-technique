@@ -1,4 +1,4 @@
-package com.coderscampus.Ogulcanassignment14;
+package com.coderscampus.assignment14;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
