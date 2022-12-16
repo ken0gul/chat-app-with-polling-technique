@@ -1,15 +1,17 @@
 package com.coderscampus.assignment14.dto;
 
-public class User {
+import java.util.UUID;
 
-	private Long id;
+public class User {
+	
+	private UUID id = UUID.randomUUID();
 	private String username;
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
