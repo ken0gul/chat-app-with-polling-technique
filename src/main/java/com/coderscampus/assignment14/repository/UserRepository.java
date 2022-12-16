@@ -1,5 +1,6 @@
 package com.coderscampus.assignment14.repository;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -10,8 +11,15 @@ import com.coderscampus.assignment14.dto.User;
 public class UserRepository {
 
 	
-	private Set<User> users;
+	private Set<User> users = new HashSet<>();
 
+	
+	public void save(User user) {
+		users.add(user);
+		System.out.println("User added");
+		
+	}
+	
 	public Set<User> getUsers() {
 		return users;
 	}
