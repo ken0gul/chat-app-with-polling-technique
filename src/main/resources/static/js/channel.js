@@ -6,7 +6,8 @@ let id = document.querySelector('textarea[data-id]')
 let endPointId = id.getAttribute('data-id');
 let textP = document.querySelector('#text');
 
-
+user.channelId = endPointId;
+sessionStorage.setItem('user',JSON.stringify(user));
 
 
 
@@ -21,16 +22,17 @@ let myArr = [];
 
 let isDone = true;
 
-
-async function fetchData() {
-   
+    
+    async function fetchData() {
+        
         let response = await fetch(`/channels/${endPointId}/messages`);
         let data = await response.json();
         let isTrue = checkData(data);
         if(isTrue) addText();
-}
+    }
+    
+    setInterval(fetchData,500);
 
-setInterval(fetchData,500);
 
 
  
@@ -76,6 +78,7 @@ function addText() {
        
 
 textArea.addEventListener('keydown', e => {
+   
     let userData = sessionStorage.getItem('user');
    	user = JSON.parse(userData);
     if (e.keyCode == 13 ) {
@@ -87,7 +90,8 @@ textArea.addEventListener('keydown', e => {
         let usr = {
             "id":user.id,
             "username":user.username,
-            "messages": msgs
+            "messages": msgs,
+            "channelId":endPointId
         }
         
   
@@ -104,7 +108,7 @@ textArea.addEventListener('keydown', e => {
     .then(response => response.json())
     .then(data=> {
     	
-    
+    console.log(data)
         
     
       textArea.value = '';
