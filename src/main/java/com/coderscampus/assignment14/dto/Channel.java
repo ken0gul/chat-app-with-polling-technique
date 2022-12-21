@@ -1,14 +1,21 @@
 package com.coderscampus.assignment14.dto;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Channel {
 
 	private Long id;
 	private String channelName;
-	private List<Channel> channels = new ArrayList<>();
-
+	private Set<User> users = new HashSet<>();
+	
+	
+	
+	public void addUser(User user) {
+		users.add(user);
+	}
+	
 	public String getChannelName() {
 		return channelName;
 	}
@@ -25,17 +32,17 @@ public class Channel {
 		this.id = id;
 	}
 
-	public List<Channel> getChannels() {
-		return channels;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setChannels(List<Channel> channels) {
-		this.channels = channels;
+	public void setUsers(Set<User> channels) {
+		this.users = channels;
 	}
 
 	@Override
 	public String toString() {
-		return "Channel [id=" + id + ", channelName=" + channelName + ", channels=" + channels + "]";
+		return "Channel [id=" + id + ", channelName=" + channelName + ", users=" + users + "]";
 	}
 
 }
