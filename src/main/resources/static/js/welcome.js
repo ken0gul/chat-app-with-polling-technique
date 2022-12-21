@@ -1,12 +1,22 @@
 
+let users = sessionStorage.getItem('user');
+let userx = JSON.parse(users);
+console.log(userx == null);
+let user;
+let username;
 
+if(userx == null) {
 
-let user = {
-    'username':`${prompt('What is your name: ')}`
+username = prompt('What is your name?');
+}
+
+ user = {
+    'username':username
+    
+
 }
 
 
-if(!sessionStorage.getItem('user')) {
 
 fetch('/welcome', {
     method:'POST',
@@ -18,10 +28,7 @@ fetch('/welcome', {
 
 
 
-sessionStorage.setItem('user',data)
+sessionStorage.setItem('user',JSON.stringify(data))
 
 
 }).catch(err=> console.log(err));
-} else {
-alert('This username is already taken');
-}
