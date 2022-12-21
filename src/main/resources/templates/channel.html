@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Channel</title>
+
+
+
+<style type="text/css">
+body {
+
+	margin:0;
+	padding:0;
+}
+
+
+.container {
+
+border: 1px solid black;
+}
+
+p {margin:0}
+
+
+	</style>
+</head>
+<body>
+	
+ 	<div class="container">
+ 	
+ 		
+ 	
+ 	</div>
+
+	<form action="" method="post">
+		<textarea id="textarea" rows="2" cols="20"
+			th:attr="data-id=${channel.id}"></textarea>
+	</form>
+	<script type="text/javascript" src="/js/channel.js"></script>
+</body>
+</html>
