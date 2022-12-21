@@ -1,5 +1,7 @@
 package com.coderscampus.assignment14.web;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,24 @@ public class WelcomeController {
 	
 	@GetMapping("/welcome")
 	public String getWelcomePage(ModelMap model) {
+		// Channel-1
 		Channel channel = new Channel();
-		channel.setChannelName("Channel-1");
+		channel.setChannelName("Students");
 		channel.setId(1L);
-		Channel savedChannel = channelService.saveChannel(channel);
 		
-		model.put("channel", savedChannel);
+		// Channel-2
+		
+		Channel channel2 = new Channel();
+		channel2.setChannelName("Instructors");
+		channel2.setId(2L);
+		
+		
+		Channel savedChannel1 = channelService.saveChannel(channel);
+		Channel savedChannel2 = channelService.saveChannel(channel2);
+		List<Channel> channels = new ArrayList<>();
+		channels.add(savedChannel1);
+		channels.add(savedChannel2);
+		model.put("channels", channels);
 		return "welcome";
 	}
 	
