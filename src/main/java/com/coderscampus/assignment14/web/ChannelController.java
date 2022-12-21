@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.assignment14.dto.Channel;
 import com.coderscampus.assignment14.dto.User;
+import com.coderscampus.assignment14.repository.ChannelRepository;
 import com.coderscampus.assignment14.service.ChannelService;
 import com.coderscampus.assignment14.service.MessageService;
 import com.coderscampus.assignment14.service.UserService;
@@ -37,8 +38,8 @@ public class ChannelController {
 	public String getChannel(@PathVariable Long id, ModelMap model) {
 		
 		Channel foundChannel = channelService.findChannelById(id);
-		List<String> allMessages = messageService.getOnlyMessages();
-		model.put("allMsgs", allMessages);
+	
+		
 		model.put("channel", foundChannel);
 		// Find the channel
 		System.out.println("Found Channel " + foundChannel);
@@ -46,46 +47,61 @@ public class ChannelController {
 		
 		
 		List<User> allUsers = userService.getUsers();
-		System.out.println(allUsers);
 		model.put("users", allUsers);
 		
 		
 		
 		
 		List<User> user =allUsers;
-		System.out.println("All Users :" + user);
-		// Print all the messages
-		System.out.println("Print all the messages" + allMessages);
+		
+		
 		return "channel";
 	}
 	
 	@GetMapping("/channels/{id}/messages")
 	@ResponseBody
 	public List<String[]> getChannel2(@PathVariable Long id) {
+		Channel channel = channelService.findChannelById(id);
 	
-		
-		return messageService.getAllMsgs();
+		return messageService.getAllMsgs(channel);
 	}
 	
 	
 	
 	@PostMapping("/channels/{id}")
 	@ResponseBody
-	public User postMessage(@RequestBody User user, Channel channel) {
-		System.out.println("Channel user is in: " + channel);
-		System.out.println("User coming from request: " + user);
-		UUID id = user.getId();
+	public User postMessage(@RequestBody User user, @PathVariable Long id) {
+	
+			
+		Long channelId = user.getChannelId();
+		Channel foundChannel = channelService.findChannelById(id);
+	
+
 		
-		User actualUser = userService.findById(id);
-		System.out.println("Found User: " + actualUser);
+		
+		
+		// get user Id
+		UUID userId = user.getId();
+		
+		User actualUser = userService.findById(userId);
+		actualUser.setChannelId(channelId);
+//		System.out.println("Found User: " + actualUser);
 		actualUser.setMessages(user.getMessages());
-		// Save message
+		
+		// Save message first
+		
+		
+		// Add user to the channel
+		foundChannel.addUser(actualUser);
+		
+		// add channel to the channels
+		channelService.saveChannelOnPost(foundChannel);
+
+//		
 		messageService.saveMessage(actualUser);
-		System.out.println(messageService.getAllMsgs());
-		
-		
 		
 		return actualUser;
+		
 		
 	}
 }
