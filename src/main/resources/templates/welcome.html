@@ -6,8 +6,9 @@
 </head>
 <body>
  <h2>Join A Channel</h2>
-
+	<div th:each="channel : ${channels}">
  <a th:href="@{/channels/{channelId}(channelId=${channel.id})}" th:text="${channel.channelName}"></a>
+	</div>
 
  
  <script type="text/javascript" src="/js/welcome.js"></script>
