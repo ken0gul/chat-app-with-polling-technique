@@ -7,17 +7,16 @@ public class Message {
 
 	private Long id;
 	private String message;
-	private  List<String[]> messages = new ArrayList<>();
-	
-	
-	
+	private List<String[]> messages = new ArrayList<>();
+
 	public void addMessages(String[] arr) {
 		messages.add(arr);
 	}
-	
-	public  List<String[]> getMessages() {
+
+	public List<String[]> getMessages() {
 		return messages;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -39,5 +38,4 @@ public class Message {
 		return "Message [id=" + id + ", message=" + message + "]";
 	}
 
-	
 }
