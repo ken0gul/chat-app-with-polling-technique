@@ -36,39 +36,30 @@ let isDone = true;
 
 
  
-         function checkData(data) {
-        
-       
+function checkData(data) {
+     if(data.length > myArr.length) {
+       myArr.length = 0;
+       let newArr = []
 
-             if(data.length > myArr.length) {
-                 myArr.length = 0;
-                 let newArr = []
-
-                 newArr.push(...data);
-                 myArr = newArr;
+       newArr.push(...data);
+       myArr = newArr;
                  
+       return true;
                  
-                 
-                 return true;
-                 
-                } else {
-                  
-                    return false;
-                }
-            
-
-            
+	} 
+	else {              
+       return false;
          }
+    }
 
 function addText() {
     
     let p = document.createElement('p');
     container.innerHTML = '';
-   for(let d of myArr) {
-        console.log(d)
-       p.innerHTML +=  `<span>${d[0]}:${d[1]}</span><br/>`;
-       
-       
+   	
+   		for(let d of myArr) {
+        	console.log(d)
+       		p.innerHTML +=  `<span>${d[0]}:${d[1]}</span><br/>`;
     }   
     container.appendChild(p);
     
@@ -94,9 +85,7 @@ textArea.addEventListener('keydown', e => {
             "channelId":endPointId
         }
         
-  
-
-
+	// FETCH - POST
     fetch(`/channels/${endPointId}`,{
         method:'POST',
         headers:{
@@ -106,17 +95,9 @@ textArea.addEventListener('keydown', e => {
     })
     
     .then(response => response.json())
-    .then(data=> {
-    	
-    console.log(data)
-        
-    
+    .then(data=> {    
       textArea.value = '';
     })
-    
-	
-
-	
 
 }});
 
