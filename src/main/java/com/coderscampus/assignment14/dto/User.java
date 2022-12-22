@@ -5,14 +5,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
-	
+
 	private UUID id = UUID.randomUUID();
 	private String username;
 	private List<String> messages = new ArrayList<>();
 	private Long channelId;
-	
-	
-	
 
 	public Long getChannelId() {
 		return channelId;
@@ -38,7 +35,6 @@ public class User {
 		this.username = username;
 	}
 
-	
 	public List<String> getMessages() {
 		return messages;
 	}
@@ -53,9 +49,4 @@ public class User {
 				+ "]";
 	}
 
-	
-
-
-	
-	
 }
