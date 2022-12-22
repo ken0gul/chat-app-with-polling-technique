@@ -39,17 +39,18 @@ public class WelcomeController {
 		channel.setId(1L);
 		
 		// Channel-2
-		
 		Channel channel2 = new Channel();
 		channel2.setChannelName("Instructors");
 		channel2.setId(2L);
 		
-		
+		// Save channels
 		Channel savedChannel1 = channelService.saveChannel(channel);
 		Channel savedChannel2 = channelService.saveChannel(channel2);
 		List<Channel> channels = new ArrayList<>();
 		channels.add(savedChannel1);
 		channels.add(savedChannel2);
+		
+		// Put channels to the model
 		model.put("channels", channels);
 		return "welcome";
 	}
@@ -57,15 +58,11 @@ public class WelcomeController {
 	@PostMapping("/welcome")
 	@ResponseBody
 	public User postUsername(@RequestBody User userFromJs) {
-		System.out.println(userFromJs);
 		UUID id = userFromJs.getId();
 		User user = new User();
 		user.setUsername(userFromJs.getUsername());
 		user.setId(id);
-		
-		System.out.println("User inside welcome " + user);
 		userService.saveUser(user);
-		System.out.println(userService.getUsers());
 		
 		return user;
 	}
