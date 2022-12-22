@@ -14,28 +14,23 @@ import com.coderscampus.assignment14.repository.ChannelRepository;
 public class ChannelService {
 	@Autowired
 	private ChannelRepository channelRepository;
-	
-	
-	
+
 	public void saveChannelOnPost(Channel channel) {
-		 channelRepository.saveUser(channel);
+		channelRepository.saveUser(channel);
 	}
-	
+
 	public Channel findChannelById(Long id) {
 		return channelRepository.findById(id);
 	}
-	
-	
+
 	public Channel saveChannel(Channel channel) {
 		return channelRepository.save(channel);
 	}
-	
-	
+
 	public List<Channel> getChannels() {
 		return channelRepository.findAll();
 	}
-	
-	
+
 	// Get messages of the channel
 	public Set<User> getUsers() {
 		return channelRepository.getUsers();
