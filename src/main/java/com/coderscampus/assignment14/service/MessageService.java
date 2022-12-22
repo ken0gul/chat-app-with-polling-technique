@@ -16,28 +16,23 @@ public class MessageService {
 
 	@Autowired
 	private MessageRepository messageRepository;
-	
-	
-	
+
 	public String saveMessage(User user) {
 		return messageRepository.save(user);
 	}
-	
-//	public Map<String, List<String>>  getAllMsgs() {
-//		return messageRepository.findAll();
-//	}
-	public List<String[]>  getAllMsgs(Channel channel) {
-		List<Message> list =  messageRepository.findAll();
+
+
+	public List<String[]> getAllMsgs(Channel channel) {
+		List<Message> list = messageRepository.findAll();
 		List<String[]> l = new ArrayList<>();
-		
-		list.forEach(item -> {;
-			if(item.getId().equals(channel.getId())) {
+
+		list.forEach(item -> {
+			;
+			if (item.getId().equals(channel.getId())) {
 				l.addAll(item.getMessages());
 			}
 		});
 		return l;
 	}
-	
-	
 
 }
