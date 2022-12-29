@@ -1,19 +1,21 @@
 
 let users = sessionStorage.getItem('user');
 let userx = JSON.parse(users);
-console.log(userx == null);
+
 let user;
-let username;
+
+
 
 if(userx == null) {
 
 username = prompt('What is your name?');
-}
 
- user = {
+} 
+
+user = {
     'username':username
     
-
+    
 }
 
 
@@ -27,8 +29,10 @@ fetch('/welcome', {
 }).then(response => response.json()).then(data => {
 
 
-
+console.log(data)
 sessionStorage.setItem('user',JSON.stringify(data))
 
 
+
 }).catch(err=> console.log(err));
+
