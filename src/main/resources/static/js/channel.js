@@ -7,7 +7,7 @@ let endPointId = id.getAttribute('data-id');
 let textP = document.querySelector('#text');
 
 user.channelId = endPointId;
-sessionStorage.setItem('user',JSON.stringify(user));
+
 
 
 
@@ -27,8 +27,10 @@ let isDone = true;
         
         let response = await fetch(`/channels/${endPointId}/messages`);
         let data = await response.json();
+        
         let isTrue = checkData(data);
         if(isTrue) addText();
+     
     }
     
     setInterval(fetchData,500);
@@ -58,7 +60,7 @@ function addText() {
     container.innerHTML = '';
    	
    		for(let d of myArr) {
-        	console.log(d)
+        
        		p.innerHTML +=  `<span>${d[0]}:${d[1]}</span><br/>`;
     }   
     container.appendChild(p);
@@ -70,8 +72,9 @@ function addText() {
 
 textArea.addEventListener('keydown', e => {
    
-    let userData = sessionStorage.getItem('user');
-   	user = JSON.parse(userData);
+    // let userData = sessionStorage.getItem('user');
+   	// user = JSON.parse(userData);
+    console.log(user);
     if (e.keyCode == 13 ) {
 	
         let message = textArea.value;
@@ -84,7 +87,8 @@ textArea.addEventListener('keydown', e => {
             "messages": msgs,
             "channelId":endPointId
         }
-        
+       
+   
 	// FETCH - POST
     fetch(`/channels/${endPointId}`,{
         method:'POST',
@@ -96,6 +100,7 @@ textArea.addEventListener('keydown', e => {
     
     .then(response => response.json())
     .then(data=> {    
+      
       textArea.value = '';
     })
 
