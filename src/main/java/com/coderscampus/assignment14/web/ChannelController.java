@@ -1,7 +1,6 @@
 package com.coderscampus.assignment14.web;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.assignment14.dto.Channel;
 import com.coderscampus.assignment14.dto.User;
-import com.coderscampus.assignment14.repository.ChannelRepository;
 import com.coderscampus.assignment14.service.ChannelService;
 import com.coderscampus.assignment14.service.MessageService;
 import com.coderscampus.assignment14.service.UserService;
@@ -35,7 +33,13 @@ public class ChannelController {
 	@GetMapping("/channels/{id}")
 
 	public String getChannel(@PathVariable Long id, ModelMap model) {
-
+		
+		List<User> users = userService.getUsers();
+		
+		if(users.isEmpty()) {
+			return "redirect:/welcome";
+		}
+		
 		Channel foundChannel = channelService.findChannelById(id);
 
 		model.put("channel", foundChannel);

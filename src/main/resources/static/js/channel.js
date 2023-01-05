@@ -6,10 +6,12 @@ let id = document.querySelector('textarea[data-id]')
 let endPointId = id.getAttribute('data-id');
 let textP = document.querySelector('#text');
 
-user.channelId = endPointId;
+// user.channelId = endPointId;
 
 
-
+if(userData == null) {
+    window.location.href='http://localhost:8080/welcome'
+}
 
 let text = "";
 // Get the current Channel first
@@ -74,7 +76,7 @@ textArea.addEventListener('keydown', e => {
    
     // let userData = sessionStorage.getItem('user');
    	// user = JSON.parse(userData);
-    console.log(user);
+  
     if (e.keyCode == 13 ) {
 	
         let message = textArea.value;
